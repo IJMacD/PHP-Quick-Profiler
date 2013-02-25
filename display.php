@@ -22,7 +22,7 @@ $cssUrl = $config.'/css/pQp.css';
 echo <<<JAVASCRIPT
 <!-- JavaScript -->
 <script type="text/javascript">
-	var PQP_DETAILS = true;
+	var PQP_DETAILS = false;
 	var PQP_HEIGHT = "short";
 	
 	addEvent(window, 'load', loadCSS);
@@ -73,6 +73,9 @@ echo <<<JAVASCRIPT
 		sheet.setAttribute("type", "text/css");
 		sheet.setAttribute("href", "$cssUrl");
 		document.getElementsByTagName("head")[0].appendChild(sheet);
+        var container = document.getElementById('pqp-container');
+        if(!PQP_DETAILS)
+            addClassName(container, "hideDetails", true);
 		setTimeout(function(){document.getElementById("pqp-container").style.display = "block"}, 10);
 	}
 	
@@ -95,7 +98,7 @@ echo <<<JAVASCRIPT
 	   }
 	   else{  
 	      objElement.className = strClass;
-	      }
+	   }
 	}
 
 	//http://www.bigbold.com/snippets/posts/show/2630
