@@ -14,6 +14,7 @@
  is terminating.
 
 - - - - - - - - - - - - - - - - - - - - - */
+require_once(__DIR__.'/Console.php');
 
 class PhpQuickProfiler {
 	
@@ -23,7 +24,6 @@ class PhpQuickProfiler {
 	public function __construct($startTime, $config = '/PHP-Quick-Profiler/') {
 		$this->startTime = $startTime;
 		$this->config = $config;
-		require_once($config.'classes/Console.php');
 	}
 	
 	/*-------------------------------------------
