@@ -23,7 +23,7 @@ class PhpQuickProfiler {
 	public function __construct($startTime, $config = '/PHP-Quick-Profiler/') {
 		$this->startTime = $startTime;
 		$this->config = $config;
-		require_once($_SERVER['DOCUMENT_ROOT'].$config.'classes/Console.php');
+		require_once($config.'classes/Console.php');
 	}
 	
 	/*-------------------------------------------
@@ -124,7 +124,7 @@ class PhpQuickProfiler {
 		}
 		catch(Exception $e) {}
 		if($rs) {
-			$row = mysql_fetch_array($rs, MYSQL_ASSOC);
+			$row = $rs->fetch();
 			$query['explain'] = $row;
 		}
 		return $query;
@@ -145,7 +145,7 @@ class PhpQuickProfiler {
 	     HELPER FUNCTIONS TO FORMAT DATA
 	-------------------------------------------*/
 	
-	function getMicroTime() {
+	static function getMicroTime() {
 		$time = microtime();
 		$time = explode(' ', $time);
 		return $time[1] + $time[0];
@@ -194,8 +194,8 @@ class PhpQuickProfiler {
 		$this->gatherMemoryData();
 		$this->gatherQueryData();
 		$this->gatherSpeedData();
-		require_once($_SERVER['DOCUMENT_ROOT'].$this->config.'display.php');
-		displayPqp($this->output, $this->config);
+		require_once($this->config.'display.php');
+		displayPqp($this->output, HTTPRequest::getCurrent()->base);
 	}
 	
 }
